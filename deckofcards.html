@@ -21,9 +21,11 @@
 
       function Deck() {
         this.cards = [];
+
         this.count = function() {
           return this.cards.length;
         }
+
         this.init = function() {
           for (var s = 0; s < suits.length; s++) {
             for (var r = 0; r < ranks.length; r++) {
@@ -31,6 +33,18 @@
             }
           }
         }
+
+        this.shuffle = function() {
+          var input = this.cards;
+          for (var i = this.count() - 1; i >= 0; i--) {
+            var randomIndex = Math.floor(Math.random() * (i + 1))
+            var itemAtIndex = input[randomIndex]
+            input[randomIndex] = input[i];
+            input[i] = itemAtIndex;
+          }
+          this.cards = input;
+        }
+
       }
 
       function Card(rank, suit) {
@@ -43,6 +57,7 @@
 
       var deck = new Deck();
       deck.init();
+      deck.shuffle();
       for (var c = 0; c < deck.count(); c++) {
         deck.cards[c].show();
       }
