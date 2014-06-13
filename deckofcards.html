@@ -2,46 +2,50 @@
 <html>
 
   <head>
+    <title>Card Game</title>
+    <style>
+      body {
+        background-color: #009900
+      }
+    </style>
   </head>
 
   <body>
     <script>
 
 
-    	var ranks, suits
+      var ranks, suits
 
-    	ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-    	suits = ['H', 'S', 'C', 'D']
-    	git 
+      ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+      suits = ['H', 'S', 'C', 'D']
 
-    	function Deck() {
-    		this.cards = [];
-    		this.count = function() {
-    			return this.cards.length;
-    		}
-    		this.init = function() {
-    			for (s = 0; s < suits.length; s++) {
-    				for (r = 0; r < ranks.length; r++) {
-	    				this.cards.push(new Card(ranks[r], suits[s]));
-    				}
-    			}
-    		}
+      function Deck() {
+        this.cards = [];
+        this.count = function() {
+          return this.cards.length;
+        }
+        this.init = function() {
+          for (var s = 0; s < suits.length; s++) {
+            for (var r = 0; r < ranks.length; r++) {
+              this.cards.push(new Card(ranks[r], suits[s]));
+            }
+          }
+        }
+      }
 
-    	}
+      function Card(rank, suit) {
+        this.rank = rank;
+        this.suit = suit;
+        this.show = function() {
+          console.log(this.rank + " of " + this.suit);
+        }
+      }
 
-    	function Card(rank, suit) {
-    		this.rank = rank;
-    		this.suit = suit;
-    		this.show = function() {
-    			console.log(this.rank + " of " + this.suit);
-    		}
-    	}
-
-    	var deck = new Deck();
-    	deck.init();
-    	for (var c in deck.cards) {
-    		c.show;
-    	}
+      var deck = new Deck();
+      deck.init();
+      for (var c = 0; c < deck.count(); c++) {
+        deck.cards[c].show();
+      }
 
     </script>
   </body>
