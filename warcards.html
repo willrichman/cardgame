@@ -13,7 +13,7 @@
   <body>
     <script>
 
-      var ranks, suits, deck, playerDeck1, playerDeck2;
+      var ranks, suits, deck, playerHand, computerHand;
 
       ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
       suits = ['H', 'S', 'C', 'D']
@@ -78,6 +78,22 @@
         deck.cards[c].show();
       }
 
+      var startWar = function(gameDeck) {
+        var toggle;
+        toggle = 0;
+        while (gameDeck.cards.length > 1) {
+          if (toggle === 0) {
+            playerHand.addCard(gameDeck.deal);
+            toggle++;
+          }
+          else if (toggle === 1) {
+            computerHand.addCard(gameDeck.deal);
+            toggle--;
+          }
+        }
+      }
+
+      
     </script>
   </body>
 
