@@ -39,8 +39,9 @@
         this.shuffle = function() {
           var input = this.cards;
           for (var i = this.count() - 1; i >= 0; i--) {
-            var randomIndex = Math.floor(Math.random() * (i + 1))
-            var itemAtIndex = input[randomIndex]
+            var randomIndex, itemAtIndex;
+            randomIndex = Math.floor(Math.random() * (i + 1))
+            itemAtIndex = input[randomIndex]
             input[randomIndex] = input[i];
             input[i] = itemAtIndex;
           }
@@ -50,6 +51,12 @@
         /* Remove and return a card, to deal to a hand or other location */
         this.dealCard = function() {
           return this.cards.shift();
+        }
+
+        this.printDeck = function() {
+          for (var c = 0; c < this.count(); c++) {
+            this.cards[c].show();
+          }
         }
       }
 
@@ -66,34 +73,51 @@
       function WarHand() {
         this.cards = [];
 
+        this.count = function() {
+          return this.cards.length;
+        }
+
         this.addCard = function(card) {
           this.cards.push(card);
+        }
+
+        this.printHand = function() {
+          for (var c = 0; c < this.count(); c++) {
+            this.cards[c].show();
+          }
         }
       }
 
       deck = new Deck();
       deck.init();
       deck.shuffle();
-      for (var c = 0; c < deck.count(); c++) {
-        deck.cards[c].show();
-      }
+      deck.printDeck;
 
+      playerHand = new WarHand();
+      computerHand = new WarHand();
+
+      /* Initialize hands to start a game of War */
       var startWar = function(gameDeck) {
-        var toggle;
+        var toggle, dealtCard;
         toggle = 0;
-        while (gameDeck.cards.length > 1) {
+        while (gameDeck.count() > 0) {
           if (toggle === 0) {
-            playerHand.addCard(gameDeck.deal);
+            playerHand.addCard(gameDeck.dealCard());
             toggle++;
           }
           else if (toggle === 1) {
-            computerHand.addCard(gameDeck.deal);
+            computerHand.addCard(gameDeck.dealCard());
             toggle--;
           }
         }
       }
 
-      
+      startWar(deck);
+      playerHand.printHand();
+      computerHand.printHand();
+      console.log(playerHand.count());
+      console.log(computerHand.count());
+
     </script>
   </body>
 
