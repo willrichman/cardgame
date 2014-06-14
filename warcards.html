@@ -2,7 +2,7 @@
 <html>
 
   <head>
-    <title>Card Game</title>
+    <title>War!</title>
     <style>
       body {
         background-color: #009900
@@ -13,11 +13,12 @@
   <body>
     <script>
 
-      var ranks, suits
+      var ranks, suits, deck, playerDeck1, playerDeck2;
 
       ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
       suits = ['H', 'S', 'C', 'D']
 
+      /* Constructor for a Deck object.  Contains ability to shuffle and deal cards.*/
       function Deck() {
         this.cards = [];
 
@@ -25,6 +26,7 @@
           return this.cards.length;
         }
 
+        /* Initialize a deck containing one card of each rank/suit combination */
         this.init = function() {
           for (var s = 0; s < suits.length; s++) {
             for (var r = 0; r < ranks.length; r++) {
@@ -33,6 +35,7 @@
           }
         }
 
+        /* Shuffle the cards in the deck */
         this.shuffle = function() {
           var input = this.cards;
           for (var i = this.count() - 1; i >= 0; i--) {
@@ -44,8 +47,13 @@
           this.cards = input;
         }
         
+        /* Remove and return a card, to deal to a hand or other location */
+        this.dealCard = function() {
+          return this.cards.shift();
+        }
       }
 
+      /* Constructor for a Card object. */
       function Card(rank, suit) {
         this.rank = rank;
         this.suit = suit;
@@ -54,7 +62,16 @@
         }
       }
 
-      var deck = new Deck();
+      /* Constructor for a hand for the game of War */
+      function WarHand() {
+        this.cards = [];
+
+        this.addCard = function(card) {
+          this.cards.push(card);
+        }
+      }
+
+      deck = new Deck();
       deck.init();
       deck.shuffle();
       for (var c = 0; c < deck.count(); c++) {
