@@ -13,10 +13,12 @@
   <body>
     <script>
 
-      var ranks, suits, deck, playerHand, computerHand;
+      var ranks, suits, values, deck, playerHand, computerHand;
 
-      ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-      suits = ['H', 'S', 'C', 'D']
+      ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+      suits = ['H', 'S', 'C', 'D'];
+      values = {'2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, 
+                '9': 9, '10': 10, 'J': 11, 'Q': 12, 'K': 13, 'A': 14};
 
       /* Constructor for a Deck object.  Contains ability to shuffle and deal cards.*/
       function Deck() {
@@ -53,6 +55,7 @@
           return this.cards.shift();
         }
 
+        /* Print every card in the deck */
         this.printDeck = function() {
           for (var c = 0; c < this.count(); c++) {
             this.cards[c].show();
@@ -64,9 +67,11 @@
       function Card(rank, suit) {
         this.rank = rank;
         this.suit = suit;
+        this.strength = values[rank];
         this.show = function() {
           console.log(this.rank + " of " + this.suit);
         }
+
       }
 
       /* Constructor for a hand for the game of War */
@@ -86,12 +91,15 @@
             this.cards[c].show();
           }
         }
+
+        this.playCard = function() {
+          
+        }
       }
 
       deck = new Deck();
       deck.init();
       deck.shuffle();
-      deck.printDeck;
 
       playerHand = new WarHand();
       computerHand = new WarHand();
@@ -113,10 +121,6 @@
       }
 
       startWar(deck);
-      playerHand.printHand();
-      computerHand.printHand();
-      console.log(playerHand.count());
-      console.log(computerHand.count());
 
     </script>
   </body>
