@@ -4,13 +4,73 @@
   <head>
     <title>War!</title>
     <style>
+
       body {
-        background-color: #009900
+        background-color: #009900;
+        color: #FFFFFF;
+        font-family: Verdana, sans-serif;
+        font-size: 18px;
+        text-align: center;
       }
+
+      #header {
+        position: relative;
+        width: 95%;
+        height: 80px;
+        background-color: #114513;
+        border-radius: 10px;
+        margin-top: -20px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+      }
+
+      #title {
+        font-size: 35px;
+        vertical-align: bottom;
+        line-height: 80px;
+        margin: 0px;
+      }
+
+      #playerSide {
+        float: left;
+        width: 50%;
+        height: 100%;
+        text-align: center;
+      }
+
+      #computerSide {
+        float: right;
+        width: 50%;
+        height: 100%;
+      }
+
+      #playDeck {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      #compDeck {
+        margin-top: auto;
+        margin-right: 20px;
+      }
+
+
     </style>
   </head>
 
   <body>
+    <div id='header'>
+        <p id= 'title'>The Game of War!</p>
+    </div>
+    <div id = 'playerSide'>
+      <img id="playDeck" src="http://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Card_back_06.svg/209px-Card_back_06.svg.png">
+    </div>
+    <div id = 'computerSide'>
+      <img id="compDeck" src="http://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Card_back_06.svg/209px-Card_back_06.svg.png">
+    </div>
+
+
     <script>
 
       var ranks, suits, strength, deck, playerHand, computerHand, cardsPlayed;
