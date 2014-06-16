@@ -32,6 +32,13 @@
         margin: 0px;
       }
 
+      #status {
+        z-index: 1;
+        position: absolute;
+        width: 100%;
+        text-align: center;
+      }
+
       #playerSide {
         float: left;
         width: 50%;
@@ -50,25 +57,26 @@
 
       #playDeck {
         margin-left: 20px;
-        padding-top: 20%;
+        padding-top: 15%;
       }
 
       #compDeck {
         margin-right: 20px;
-        padding-top: 20%;
+        padding-top: 15%;
       }
 
       p {
         margin: 20px;
       }
+
       #playerText {
         float: right;
-        padding-top: 20%;
+        padding-top: 15%;
       }
 
       #computerText {
         float: left;
-        padding-top: 20%;
+        padding-top: 15%;
       }
     </style>
   </head>
@@ -78,13 +86,15 @@
     <div id='header'>
         <p id= 'title'>The Game of War!</p>
     </div>
-
-    <div id = 'playerSide'>
+    <div id='status'>
+      <p id='gameText'></p>
+    </div>
+    <div id='playerSide'>
       <img id="playDeck" src="http://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Card_back_06.svg/209px-Card_back_06.svg.png">
       <p id="playerText">Player played a 4C</p>
     </div>
 
-    <div id = 'computerSide'>
+    <div id='computerSide'>
       <img id="compDeck" src="http://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Card_back_06.svg/209px-Card_back_06.svg.png">
       <p id="computerText">Computer played a 5S</p>
     </div>
@@ -175,8 +185,18 @@
 
         this.playCard = function() {
           if (this.count != 0) {
+            var nextCard = this.cards[0];
             console.log(this.name + " plays a:")
-            this.cards[0].show();
+            nextCard.show();
+            if (this.name == "Player") {
+              document.getElementById("playerText").innerHTML = "Player played a " + nextCard.rank + " of " + nextCard.suit;
+            }
+            else if (this.name == "Computer") {
+              document.getElementById("computerText").innerHTML = "Computer played a " + nextCard.rank + " of " + nextCard.suit;
+            }
+            else {
+              alert("Not a valid deck!")
+            }
             return this.cards.shift();
           }
         }
@@ -213,20 +233,20 @@
           hand1.addCard(card1);
           hand1.addCard(card2);
           hand1.cards = hand1.cards.concat(cardsPlayed);
-          cardsPlayed = []
-          console.log("Player wins and takes the cards!");
+          cardsPlayed = [];
+          document.getElementById("gameText").innerHTML = "Player wins and takes the cards!";
         }
 
         else if (card1.strength < card2.strength) {
           hand2.addCard(card1);
           hand2.addCard(card1);
           hand2.cards = hand2.cards.concat(cardsPlayed);
-          cardsPlayed = []
-          console.log("Computer wins and takes the cards!");
+          cardsPlayed = [];
+          document.getElementById("gameText").innerHTML = "Computer wins and takes the cards!";
         }
 
         else if (card1.strength === card2.strength) {
-          console.log("War!")
+          document.getElementById("gameText").innerHTML = "War!";
           cardsPlayed.push(card1);
           cardsPlayed.push(card2);
           for (i = 1; i <= 3; i++) {
