@@ -13,12 +13,13 @@
   <body>
     <script>
 
-      var ranks, suits, values, deck, playerHand, computerHand;
+      var ranks, suits, strength, deck, playerHand, computerHand, cardsPlayed;
 
       ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
       suits = ['H', 'S', 'C', 'D'];
-      values = {'2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, 
+      strength = {'2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, 
                 '9': 9, '10': 10, 'J': 11, 'Q': 12, 'K': 13, 'A': 14};
+      cardsPlayed = [];
 
       /* Constructor for a Deck object.  Contains ability to shuffle and deal cards.*/
       function Deck() {
@@ -67,7 +68,7 @@
       function Card(rank, suit) {
         this.rank = rank;
         this.suit = suit;
-        this.strength = values[rank];
+        this.strength = strength[rank];
         this.show = function() {
           console.log(this.rank + " of " + this.suit);
         }
@@ -75,9 +76,9 @@
       }
 
       /* Constructor for a hand for the game of War */
-      function WarHand() {
+      function WarHand(name) {
         this.cards = [];
-
+        this.name = name;
         this.count = function() {
           return this.cards.length;
         }
@@ -93,7 +94,11 @@
         }
 
         this.playCard = function() {
-          
+          if (this.count != 0) {
+            console.log(this.name + " plays a:")
+            this.cards[1].show();
+            return this.cards.shift();
+          }
         }
       }
 
@@ -101,8 +106,8 @@
       deck.init();
       deck.shuffle();
 
-      playerHand = new WarHand();
-      computerHand = new WarHand();
+      playerHand = new WarHand("Player");
+      computerHand = new WarHand("Computer");
 
       /* Initialize hands to start a game of War */
       var startWar = function(gameDeck) {
@@ -120,7 +125,40 @@
         }
       }
 
+      var playRound = function(hand1, hand2) {
+        var card1 = hand1.playCard();
+        var card2 = hand2.playCard();
+
+        if (card1.strength > card2.strength) {
+          hand1.addCard(card1);
+          hand1.addCard(card2);
+          hand1.cards = hand1.cards.concat(cardsPlayed);
+          cardsPlayed = []
+          console.log("Player wins and takes the cards!");
+        }
+
+        else if (card1.strength < card2.strength) {
+          hand2.addCard(card1);
+          hand2.addCard(card1);
+          hand2.cards = hand2.cards.concat(cardsPlayed);
+          cardsPlayed = []
+          console.log("Computer wins and takes the cards!");
+        }
+
+        else if (card1.strength === card2.strength) {
+          console.log("War!")
+          cardsPlayed.push(card1);
+          cardsPlayed.push(card2);
+          for (i = 1; i <= 3; i++) {
+            cardsPlayed.push(hand1.playCard());
+            cardsPlayed.push(hand2.playCard());
+          }
+          playRound(hand1, hand2);
+        }
+      }
+
       startWar(deck);
+      playRound(playerHand, computerHand);
 
     </script>
   </body>
