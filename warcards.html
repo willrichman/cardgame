@@ -9,7 +9,6 @@
         background-color: #009900;
         color: #FFFFFF;
         font-family: Verdana, sans-serif;
-        font-size: 18px;
         text-align: center;
       }
 
@@ -79,6 +78,18 @@
         padding-top: 15%;
       }
 
+      #playerCount {
+        float:left;
+      }
+
+      #computerCount {
+        float: right;
+      }
+
+      #statusBar {
+        float: bottom;
+        clear: top;
+      }
     </style>
   </head>
 
@@ -101,10 +112,10 @@
     </div>
 
     <div id='statusBar'>
-      <p id="playerCount"></p> 
+      <p id="playerCount">Test text</p> 
       <input type="button" id="playNext" onmouseup="playRound(playerHand,
         computerHand)" value="Play a round!"/>
-
+      <p id="computerCount">Test text</p>
     </div>
 
     <script>
@@ -206,6 +217,17 @@
             return this.cards.shift();
           }
         }
+
+        this.showCount = function() {
+          if (this.name == "Player") {
+            document.getElementById("playerCount").innerHTML = this.name + 
+              " cards left: " + this.count()
+          }
+          else if (this.name == "Computer") {
+            document.getElementById("computerCount").innerHTML = this.name + 
+              " cards left: " + this.count()
+          }
+        }
       }
 
       deck = new Deck();
@@ -229,6 +251,8 @@
             toggle--;
           }
         }
+        playerHand.showCount();
+        computerHand.showCount();
       }
 
       /* Play a round of War */
@@ -265,6 +289,9 @@
           }
           playRound(hand1, hand2);
         }
+
+        playerHand.showCount();
+        computerHand.showCount(); 
       }
 
       startWar(deck);
