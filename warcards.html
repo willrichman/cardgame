@@ -78,6 +78,7 @@
         float: left;
         padding-top: 15%;
       }
+
     </style>
   </head>
 
@@ -91,15 +92,20 @@
     </div>
     <div id='playerSide'>
       <img id="playDeck" src="http://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Card_back_06.svg/209px-Card_back_06.svg.png">
-      <p id="playerText">Player played a 4C</p>
+      <p id="playerText"></p>
     </div>
 
     <div id='computerSide'>
       <img id="compDeck" src="http://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Card_back_06.svg/209px-Card_back_06.svg.png">
-      <p id="computerText">Computer played a 5S</p>
+      <p id="computerText"></p>
     </div>
 
-    <input type="button" id="playNext" onmouseup="playRound(playerHand, computerHand)" value="Play a round!"/>
+    <div id='statusBar'>
+      <p id="playerCount"></p> 
+      <input type="button" id="playNext" onmouseup="playRound(playerHand,
+        computerHand)" value="Play a round!"/>
+
+    </div>
 
     <script>
 
@@ -133,8 +139,8 @@
           var input = this.cards;
           for (var i = this.count() - 1; i >= 0; i--) {
             var randomIndex, itemAtIndex;
-            randomIndex = Math.floor(Math.random() * (i + 1))
-            itemAtIndex = input[randomIndex]
+            randomIndex = Math.floor(Math.random() * (i + 1));
+            itemAtIndex = input[randomIndex];
             input[randomIndex] = input[i];
             input[i] = itemAtIndex;
           }
@@ -225,6 +231,7 @@
         }
       }
 
+      /* Play a round of War */
       var playRound = function(hand1, hand2) {
         var card1 = hand1.playCard();
         var card2 = hand2.playCard();
@@ -235,6 +242,7 @@
           hand1.cards = hand1.cards.concat(cardsPlayed);
           cardsPlayed = [];
           document.getElementById("gameText").innerHTML = "Player wins and takes the cards!";
+          console.log("Player wins and takes the cards!");
         }
 
         else if (card1.strength < card2.strength) {
@@ -243,10 +251,12 @@
           hand2.cards = hand2.cards.concat(cardsPlayed);
           cardsPlayed = [];
           document.getElementById("gameText").innerHTML = "Computer wins and takes the cards!";
+          console.log("Computer wins and takes the cards!");
         }
 
         else if (card1.strength === card2.strength) {
           document.getElementById("gameText").innerHTML = "War!";
+          console.log("War!");
           cardsPlayed.push(card1);
           cardsPlayed.push(card2);
           for (i = 1; i <= 3; i++) {
