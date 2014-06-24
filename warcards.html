@@ -3,134 +3,7 @@
 
   <head>
     <title>War!</title>
-    <style>
-      // Clearfix stuff
-        .container:after { 
-          content: "\0020"; 
-          display: block; 
-          height: 0; 
-          clear: both; 
-          visibility: hidden;
-        }
-
-        .clearfix:before,
-        .clearfix:after,
-        .row:before,
-        .row:after {
-          content: '\0020';
-          display: block;
-          overflow: hidden;
-          visibility: hidden;
-          width: 0;
-          height: 0;
-        }
-
-        .row:after,
-        .clearfix:after {
-        clear: both;
-        }
-
-        .row,
-        .clearfix {
-        zoom: 1;
-        }
-
-        .clear {
-        clear: both;
-        display: block;
-        overflow: hidden;
-        visibility: hidden;
-        width: 0;
-        height: 0;
-      }
-
-
-      body {
-        background-color: #009900;
-        color: #FFFFFF;
-        font-family: Verdana, sans-serif;
-        text-align: center;
-      }
-
-      #header {
-        position: relative;
-        width: 95%;
-        height: 80px;
-        background-color: #114513;
-        border-radius: 10px;
-        margin-top: -20px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 20px;
-      }
-
-      #title {
-        font-size: 35px;
-        vertical-align: bottom;
-        line-height: 80px;
-        margin: 0px;
-      }
-
-      #status {
-        z-index: 1;
-        position: absolute;
-        width: 100%;
-        text-align: center;
-      }
-
-      #playerSide {
-        float: left;
-        width: 50%;
-        height: 600px;
-        text-align: left;
-        vertical-align: middle;
-      }
-
-      #computerSide {
-        float: right;
-        width: 50%;
-        height: 600px;
-        text-align: right;
-        vertical-align: middle;
-      }
-
-      #playDeck {
-        margin-left: 20px;
-        padding-top: 15%;
-      }
-
-      #compDeck {
-        margin-right: 20px;
-        padding-top: 15%;
-      }
-
-      p {
-        margin: 20px;
-      }
-
-      #playerText {
-        float: right;
-        padding-top: 15%;
-      }
-
-      #computerText {
-        float: left;
-        padding-top: 15%;
-      }
-
-      #playerCount {
-        float:left;
-      }
-
-      #computerCount {
-        float: right;
-      }
-
-      #statusBar {
-        float: bottom;
-        clear: top;
-      }
-    </style>
+    <link rel='stylesheet' type='text/css' href='stylesheet.css'/>
   </head>
 
   <body class='clearfix'>
@@ -144,14 +17,14 @@
     </div>
     <div id='playerSide'>
       <img id="playDeck" src="http://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Card_back_06.svg/209px-Card_back_06.svg.png">
-      <p id="playerText">&nbsp;</p>
-      <p id="playerText2">&nbsp;</p>
+      <p id="playerText" class="playerText">&nbsp;</p>
+      <p id="playerText2" class="playerText">&nbsp;</p>
     </div>
 
     <div id='computerSide'>
       <img id="compDeck" src="http://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Card_back_06.svg/209px-Card_back_06.svg.png">
-      <p id="computerText">&nbsp;</p>
-      <p id="computerText2">&nbsp;</p>
+      <p id="computerText" class="computerText">&nbsp;</p>
+      <p id="computerText2" class="computerText">&nbsp;</p>
     </div>
 
     <div id='statusBar'>
