@@ -103,14 +103,20 @@ p {
   margin: 20px;
 }
 
-#playerText {
+.playerText {
   float: right;
-  padding-top: 15%;
+}
+
+.computerText {
+  float: left;
+}
+
+#playerText {
+  padding-top: 15%
 }
 
 #computerText {
-  float: left;
-  padding-top: 15%;
+  padding-top: 15%
 }
 
 #playerCount {

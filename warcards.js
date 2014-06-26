@@ -1,10 +1,11 @@
-var ranks, suits, strength, deck, playerHand, computerHand, cardsPlayed;
+var ranks, suits, strength, deck, playerHand, computerHand, cardsPlayed, isWar;
 
 ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 suits = ['H', 'S', 'C', 'D'];
 strength = {'2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, 
           '9': 9, '10': 10, 'J': 11, 'Q': 12, 'K': 13, 'A': 14};
 cardsPlayed = [];
+isWar = false;
 
 /* Constructor for a Deck object.  Contains ability to shuffle and deal cards.*/
 function Deck() {
@@ -116,6 +117,12 @@ deck.shuffle();
 playerHand = new WarHand("Player");
 computerHand = new WarHand("Computer");
 
+var clearWar = function() {
+    document.getElementById("playerText2").innerHTML = "&nbsp";
+    document.getElementById("computerText2").innerHTML = "&nbsp";
+    document.getElementById("gameText2").innerHTML = "&nbsp";
+}
+
 /* Initialize hands to start a game of War */
 var startWar = function(gameDeck) {
   var toggle, dealtCard;
@@ -146,6 +153,10 @@ var playRound = function(hand1, hand2) {
     cardsPlayed = [];
     document.getElementById("gameText").innerHTML = "Player wins and takes the cards!";
     console.log("Player wins and takes the cards!");
+    if (isWar) {
+      clearWar();
+      isWar = false;
+    }
   }
 
   else if (card1.strength < card2.strength) {
@@ -155,6 +166,10 @@ var playRound = function(hand1, hand2) {
     cardsPlayed = [];
     document.getElementById("gameText").innerHTML = "Computer wins and takes the cards!";
     console.log("Computer wins and takes the cards!");
+    if (isWar) {
+      clearWar();
+      isWar = false;
+    }
   }
 
   else if (card1.strength === card2.strength) {
@@ -167,15 +182,19 @@ var playRound = function(hand1, hand2) {
       cardsPlayed.push(hand1.playCard());
       cardsPlayed.push(hand2.playCard());
     }
+
     document.getElementById("playerText2").innerHTML = "Player lays down a " +
       cardsPlayed[cardsPlayed.length - 6].show() + ", " + cardsPlayed
       [cardsPlayed.length - 4].show() + ", and " + cardsPlayed
       [cardsPlayed.length - 2].show();
+
     document.getElementById("computerText2").innerHTML = 
       "Computer lays down a " + cardsPlayed[cardsPlayed.length - 5].show() + 
       ", " + cardsPlayed[cardsPlayed.length - 3].show() + ", and " +
       cardsPlayed[cardsPlayed.length - 1].show();
+
     playRound(hand1, hand2);
+    isWar = true;
   }
 
   playerHand.showCount();
