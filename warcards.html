@@ -8,31 +8,31 @@
 
   <body class='clearfix'>
 
-    <div id='header'>
-        <p id= 'title'>The Game of War!</p>
-    </div>
+    <header id='header'>
+      <p id= 'title'>The Game of War!</p>
+    </header>
     <div id='status'>
       <p id='gameText'></p>
       <p id='gameText2'></p>
     </div>
-    <div id='playerSide'>
+    <section id='playerSide'>
       <img id="playDeck" src="http://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Card_back_06.svg/209px-Card_back_06.svg.png">
       <p id="playerText" class="playerText">&nbsp;</p>
       <p id="playerText2" class="playerText">&nbsp;</p>
-    </div>
+    </section>
 
-    <div id='computerSide'>
+    <section id='computerSide'>
       <img id="compDeck" src="http://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Card_back_06.svg/209px-Card_back_06.svg.png">
       <p id="computerText" class="computerText">&nbsp;</p>
       <p id="computerText2" class="computerText">&nbsp;</p>
-    </div>
+    </section>
 
-    <div id='statusBar'>
+    <footer id='statusBar'>
       <p id="playerCount"></p> 
       <input type="button" id="playNext" onmouseup="playRound(playerHand,
         computerHand)" value="Play a round!"/>
       <p id="computerCount"></p>
-    </div>
+    </footer>
 
     <script type='text/javascript' src='warcards.js'></script>
     
